@@ -6,10 +6,14 @@
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
   <property name="thirdParty"  location="thirdParty"/>
+  <property name="thirdPartyJdom"  location="thirdPartyJdom"/>
 
   <path id="compile.classpath">
     <pathelement location="${build}"/>
     <fileset dir="${thirdParty}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${thirdPartyJdom}">
       <include name="**/*.jar"/>
     </fileset>
   </path>
@@ -18,6 +22,9 @@
       <include name="**/*.jar"/>
     </fileset>
     <fileset dir="${thirdParty}">
+      <include name="**/*.jar"/>
+    </fileset>
+    <fileset dir="${thirdPartyJdom}">
       <include name="**/*.jar"/>
     </fileset>
   </path>
@@ -41,8 +48,8 @@
     <jar jarfile="${dist}/lib/xxx-${DSTAMP}.jar" basedir="${build}"/>
   </target>
   <target name="mb" depends="dist" 
-        description="run MusicMetadataWrapper " >
-     <java classname="net.studygroup.MusicMetadataWrapper" >
+        description="run MusicMetadataWrapper JDOM..." >
+     <java classname="net.studygroup.MusicMetadataWrapperJDOM" >
          <classpath refid="run.classpath"> </classpath>
        </java>
   </target>
