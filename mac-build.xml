@@ -48,6 +48,12 @@
     <jar jarfile="${dist}/lib/xxx-${DSTAMP}.jar" basedir="${build}"/>
   </target>
   <target name="mb" depends="dist" 
+        description="run MusicMetadataWrapper ..." >
+     <java classname="net.studygroup.MusicMetadataWrapper" >
+         <classpath refid="run.classpath"> </classpath>
+       </java>
+  </target>
+  <target name="mbjdom" depends="dist" 
         description="run MusicMetadataWrapper JDOM..." >
      <java classname="net.studygroup.MusicMetadataWrapperJDOM" >
          <classpath refid="run.classpath"> </classpath>
