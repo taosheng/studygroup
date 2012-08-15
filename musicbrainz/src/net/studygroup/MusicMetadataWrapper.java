@@ -4,8 +4,10 @@ import org.apache.http.*;
 import org.apache.http.impl.client.DefaultHttpClient ;
 import org.apache.http.client.methods.*; 
 import javax.xml.parsers.*;
+import javax.xml.xpath.*;
 import java.io.* ;
 import org.w3c.dom.*;
+import javax.xml.transform.dom.*;
 
  
 public class MusicMetadataWrapper{
@@ -44,12 +46,24 @@ public class MusicMetadataWrapper{
         id = nl.item(0).getAttributes().getNamedItem("id").getNodeValue() ;
 	return id;
     }
+    public String findArtistByXPath(String name, String path)throws Exception{
+	String id ="" ;
+        String queryString = this.QUERY_URL + "artist?query="+name;
+        Document artistDoc = getQueryResultDocument(queryString) ;
+        XPath xpath = XPathFactory.newInstance().newXPath();
+   
+        id = xpath.evaluate(path,artistDoc);
+    
+	return id;
+    }
     public static void main(String[] args)throws Exception{
         println("musicbrainz test") ;
 
 	MusicMetadataWrapper mmw = new MusicMetadataWrapper();
 	String artistId = mmw.findArtist("Jolin");
+	String artistId2 = mmw.findArtistByXPath("Jolin","//artist/@id");
         println( artistId );
+        println( artistId2 );
 
         
        // Prepare a request object
