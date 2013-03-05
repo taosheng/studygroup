@@ -32,4 +32,20 @@ print "generate sig...done"
 
 sig.close()
 source.close()
-print "done"
+
+newfile = open("log.file.new","r")
+sig = open("sig","r")
+delta = open("delta","w")
+
+newfileP = PyFile_AsFile(newfile)
+sigP = PyFile_AsFile(sig)
+deltaP = PyFile_AsFile(delta)
+
+print "generate delta"
+libc.rs_delta_file(sigP, newfileP, deltaP, None)
+print "generate delta...done"
+
+newfile.close()
+sig.close()
+delta.close()
+
